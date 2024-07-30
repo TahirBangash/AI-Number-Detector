@@ -11,6 +11,15 @@ model = load_model(model_path)
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    print(request.files)
+    print(request.form)
+    if 'image' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
     file = request.files['image']
     img = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, (28, 28)) / 255.0
