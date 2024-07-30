@@ -6,7 +6,7 @@ import cv2
 import os
 
 app = Flask(__name__)
-model_path = os.path.join(os.path.dirname(__file__), '../saved_model/mnist_model.h5')
+model_path = os.path.join(os.path.dirname(__file__), '../saved_model/mnist_model.keras')
 model = load_model(model_path)
 
 @app.route('/predict', methods=['POST'])
